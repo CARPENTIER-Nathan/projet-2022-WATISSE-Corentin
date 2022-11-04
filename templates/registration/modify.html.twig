@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Information update</h1>
+
+    {{ form_start(modifyForm) }}
+
+
+    {{ form_row(modifyForm.email) }}
+    {{ form_row(modifyForm.nom) }}
+    {{ form_row(modifyForm.prenom) }}
+    {{ form_row(modifyForm.age) }}
+    {{ form_row(modifyForm.ville) }}
+    {{ form_row(modifyForm.telephone) }}
+
+
+    <button type="submit" class="btn">Register</button>
+    {{ form_end(modifyForm) }}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
