@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\ModifyForm;
-use App\Form\RegistrationFormType;
+use App\Form\ModifyFormFormType;
+use App\Form\NewThemeFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,11 +21,12 @@ class UserInformationController extends AbstractController
         $user = $doctrine->getRepository(User::class)->find($user->getId());
 
 
-        $form = $this->createForm(ModifyForm::class, $user);
+        $form = $this->createForm(ModifyFormFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // nouvelles datas
+            $user->setPseudo($form->get('pseudo')->getData());
             $user->setNom($form->get('nom')->getData());
             $user->setPrenom($form->get('prenom')->getData());
             $user->setAge($form->get('age')->getData());

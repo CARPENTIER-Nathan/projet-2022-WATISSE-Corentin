@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Add theme to the forum</h1>
+
+    {{ form_start(NewThemeForm) }}
+
+
+    {{ form_row(NewThemeForm.nom) }}
+
+
+    <button type="submit" class="btn"> Add !</button>
+    {{ form_end(NewThemeForm) }}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

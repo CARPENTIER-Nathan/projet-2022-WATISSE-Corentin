@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Information update</h1>
+    <h1>Account's informations</h1>
 
     {{ form_start(modifyForm) }}
 
 
     {{ form_row(modifyForm.email) }}
+    {{ form_row(modifyForm.pseudo) }}
     {{ form_row(modifyForm.nom) }}
     {{ form_row(modifyForm.prenom) }}
     {{ form_row(modifyForm.age) }}
@@ -14,7 +15,7 @@
     {{ form_row(modifyForm.telephone) }}
 
 
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn">Save!</button>
     {{ form_end(modifyForm) }}
 
 {% endblock %}
