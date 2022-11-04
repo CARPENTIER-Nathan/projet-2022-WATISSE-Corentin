@@ -14,6 +14,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            login_throttling:
+                max_attempts: 3
+                interval: '5 minutes'
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginAuthenticator
@@ -21,6 +24,12 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+        default:
+            login_throttling:
+                max_attempts: 3
+                interval: '5 minutes'
+
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
