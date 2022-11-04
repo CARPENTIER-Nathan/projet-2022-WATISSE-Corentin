@@ -1,6 +1,20 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+{% endblock %}
+
 
 {% block body %}
+
     <h1>Account's informations</h1>
 
     {{ form_start(modifyForm) }}
@@ -20,7 +34,16 @@
 
 {% endblock %}
 
-{% block title %}
-
+{% block JSAfterBody %}
+    <script>
+        $( function() {
+            var availableTags = {{ MonTabDeVille|raw }}
+            $( "#modify_form_form_ville" ).autocomplete({
+                source: availableTags
+            });
+        } );
+    </script>
 {% endblock %}
+
+
 

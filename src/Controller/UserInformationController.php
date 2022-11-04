@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Ville;
 use App\Form\ModifyFormFormType;
 use App\Form\NewThemeFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,8 +37,19 @@ class UserInformationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
         }
+
+        $MonTabDeVille = '[';
+        $BDDVille = $doctrine->getRepository(Ville::class)->findAll();
+
+        foreach ($BDDVille as $key){
+            $temp = $key->getNom();
+            $MonTabDeVille .= '"'.$temp.'", ';
+    }
+        $MonTabDeVille .= ']';
+
         return $this->render('registration/modify.html.twig', [
-            'modifyForm' => $form->createView(),
+            'modifyForm'    => $form->createView(),
+            'MonTabDeVille' => $MonTabDeVille
         ]);
     }
 }
