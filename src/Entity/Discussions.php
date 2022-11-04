@@ -25,6 +25,9 @@ class Discussions
     #[ORM\Column(length: 255)]
     private ?string $Createur = null;
 
+    #[ORM\ManyToOne(targetEntity: Themes::class, inversedBy: 'nom')]
+    private ?string $Theme = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Discussions
     public function setCreateur(string $Createur): self
     {
         $this->Createur = $Createur;
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->Theme;
+    }
+
+    public function setTheme(string $Theme): self
+    {
+        $this->Theme = $Theme;
 
         return $this;
     }

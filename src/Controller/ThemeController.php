@@ -5,17 +5,15 @@ namespace App\Controller;
 use App\Entity\Themes;
 use App\Form\NewThemeFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ThemeController extends AbstractController
 {
     #[Route('/new_theme', name: 'new_theme')]
-    public function register(Request $request,  EntityManagerInterface $entityManager, ManagerRegistry $doctrine, UserInterface $user): Response
+    public function register(Request $request,  EntityManagerInterface $entityManager): Response
     {
         $theme = new Themes();
 
