@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+    Add themes !
+{% endblock %}
+
+
+{% block Titlebody %}Add a new theme to the forum{% endblock %}
 
 {% block body %}
-    <h1>Add theme to the forum</h1>
+    {% form_theme NewThemeForm 'bootstrap_5_layout.html.twig' %}
 
     {{ form_start(NewThemeForm) }}
 
@@ -9,12 +15,10 @@
     {{ form_row(NewThemeForm.nom) }}
 
 
-    <button type="submit" class="btn"> Add !</button>
+    <button type="submit" class="btn btn-primary"> Add !</button>
     {{ form_end(NewThemeForm) }}
 
 {% endblock %}
 
-{% block title %}
 
-{% endblock %}
 

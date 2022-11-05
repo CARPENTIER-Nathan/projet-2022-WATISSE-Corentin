@@ -2,6 +2,8 @@
 
 {% block title %}Log in!{% endblock %}
 
+{% block Titlebody %} Please sign in{% endblock %}
+
 {% block body %}
 <form method="post">
     {% if error %}
@@ -14,7 +16,6 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
@@ -35,8 +36,9 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-primary" type="submit">
         Sign in
     </button>
+    <p style="font-size: 12px"> If you don't have an account yet,<a href="{{ path('app_register') }}"> you can click here !</a></p>
 </form>
 {% endblock %}
