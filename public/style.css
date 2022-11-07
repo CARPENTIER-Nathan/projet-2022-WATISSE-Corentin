@@ -52,11 +52,11 @@ body{
 
 /* ===== Reusable code - Here ===== */
 .sidebar li{
-    height: 70px;
+    height: 50px;
     list-style: none;
     display: flex;
     align-items: center;
-    margin-top: -8px;
+    margin-top: 10px;
 }
 
 .sidebar header .image,
@@ -75,26 +75,25 @@ body{
     font-size: 20px;
 }
 
-.sidebar .text,
+.sidebar .Container,
 .sidebar .icon{
     color: var(--text-color);
     transition: var(--tran-03);
 }
 
-.sidebar .text{
+.sidebar .Container{
     font-size: 17px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
 }
-.sidebar.close .text{
+.sidebar.close .Container{
     opacity: 0;
 }
 /* =========================== */
 
 .sidebar header{
     position: relative;
-    margin-top: 10px;
 }
 
 .sidebar header .image-text{
@@ -151,8 +150,7 @@ header .image-text .profession{
 }
 
 .sidebar .menu{
-    margin-top: 20px;
-    margin-left: -50px;
+    margin-top: 40px;
 }
 
 .sidebar li.search-box{
@@ -191,12 +189,12 @@ header .image-text .profession{
     background-color: var(--primary-color);
 }
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text{
+.sidebar li a:hover .Container{
     color: var(--sidebar-color);
 }
 
 .sidebar .menu-bar{
-    height: calc(100% - 100px);
+    height: calc(100% - 55px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -257,7 +255,7 @@ header .image-text .profession{
     transition: var(--tran-04);
 }
 
-.home{
+.PageContainer{
     position: absolute;
     top: 0;
     top: 0;
@@ -267,27 +265,28 @@ header .image-text .profession{
     background-color: var(--body-color);
     transition: var(--tran-05);
 }
-.home .text{
+.PageContainer .Container{
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
     padding: 12px 60px;
 }
 
-.sidebar.close ~ .home{
+.sidebar.close ~ .PageContainer{
     left: 78px;
     height: 100vh;
     width: calc(100% - 78px);
 }
 
 
+
 .hrMenu{
-    margin-top: 50px;
-    height: 7px;
-    color: var(--primary-color);
-    background: var(--primary-color);
-    outline: var(--primary-color);
-    border-radius: 50px;
+    margin-top: 50px !important;
+    height: 7px !important;
+    color: var(--primary-color) !important;
+    background: var(--primary-color)!important;
+    outline: var(--primary-color)!important;
+    border-radius: 50px !important;
 }
 .PageTitle{
     text-decoration: underline var(--text-color) 2px solid;
@@ -297,4 +296,8 @@ header .image-text .profession{
 .btn-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+}
+
+.Contain50{
+    width: 50%;
 }

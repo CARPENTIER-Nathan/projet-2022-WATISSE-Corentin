@@ -7,8 +7,7 @@
 {% block Titlebody %}Add a new theme to the forum{% endblock %}
 
 {% block body %}
-    {% form_theme NewThemeForm 'bootstrap_5_layout.html.twig' %}
-
+    <div class="Contain50">
     {{ form_start(NewThemeForm) }}
 
 
@@ -17,7 +16,7 @@
 
     <button type="submit" class="btn btn-primary"> Add !</button>
     {{ form_end(NewThemeForm) }}
-
+    </div>
 {% endblock %}
 
 

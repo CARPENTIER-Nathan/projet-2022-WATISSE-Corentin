@@ -39,7 +39,7 @@
                 <span class="image">
                     <img src="{{ asset('logo.png') }}" alt="logo">
                 </span>
-                <div class="text logo-text">
+                <div class="Container logo-text">
                     {% if app.user.email is defined %}
                     <span class="name">{{ app.user.pseudo }}</span>
                     {% else %}
@@ -59,29 +59,27 @@
                     <li class="nav-link">
                         <a href="{{ path('user_informations') }}">
                             <i class='bx bx-user icon'></i>
-                            <span class="text nav-text">Your profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-list-ul icon' ></i>
-                            <span class="text nav-text">A - Themes list</span>
+                            <span class="Container nav-text">Your profile</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="{{ path('new_theme') }}">
                             <i class='bx bx-list-ul icon' ></i>
-                            <span class="text nav-text">A - New theme</span>
+                            <span class="Container nav-text">A - New</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-list-minus icon' ></i>
-                            <span class="text nav-text">A - User list</span>
+                            <span class="text nav-text">A - User</span>
                         </a>
                     </li>
                 </ul>
+                <hr class="hrMenu">
+
             </div>
+
+
 
             <div class="bottom-content">
                 <li class="">
@@ -98,10 +96,10 @@
 
     </nav>
 
-    <section class="home">
-        <div class="text">
+    <section class="PageContainer">
+        <div class="Container">
             <h1 class="PageTitle">{% block Titlebody %} {% endblock %}</h1>
-            <div class="container">{% block body %}{% endblock %}</div>
+            <div class="DivContainer">{% block body %}{% endblock %}</div>
         </div>
 
     </section>

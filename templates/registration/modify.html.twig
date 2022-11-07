@@ -6,14 +6,14 @@
 {% block Titlebody %} Account's informations {% endblock %}
 
 {% block body %}
+    <div class="Contain50">
 
     {{ form_start(modifyForm) }}
 
-
     {{ form_row(modifyForm.email) }}
-    {{ form_row(modifyForm.pseudo) }}
+   {{ form_row(modifyForm.pseudo) }}
     {{ form_row(modifyForm.nom) }}
-    {{ form_row(modifyForm.prenom) }}
+    {{ form_row(modifyForm.prenom,) }}
     {{ form_row(modifyForm.age) }}
     {{ form_row(modifyForm.ville) }}
     {{ form_row(modifyForm.telephone) }}
@@ -21,7 +21,7 @@
 
     <button type="submit" class="btn btn-primary">Save!</button>
     {{ form_end(modifyForm) }}
-
+    </div>
 {% endblock %}
 
 {% block JSAfterBody %}
