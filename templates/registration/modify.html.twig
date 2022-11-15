@@ -7,11 +7,13 @@
 
 {% block body %}
     <div class="Contain50">
+        <h3> Your personnal data </h3>
+        <hr>
 
     {{ form_start(modifyForm) }}
 
     {{ form_row(modifyForm.email) }}
-   {{ form_row(modifyForm.pseudo) }}
+    {{ form_row(modifyForm.pseudo) }}
     {{ form_row(modifyForm.nom) }}
     {{ form_row(modifyForm.prenom,) }}
     {{ form_row(modifyForm.age) }}

@@ -16,6 +16,7 @@
             <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
 
         {% endblock %}
 
@@ -33,81 +34,91 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+        <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+
 
     </head>
-    <body>
-
-
-
-
 
 <body id="body-pd">
-<header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-</header>
-<div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-        <div> <a href="{{ path('app_login') }}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> <a href="{{ path('app_login') }}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">
 
-                    {% if app.user.email is defined %}
-                    <span class="name">{{ app.user.pseudo }}</span>
-                    {% else %}
-                    <span class="name" style="font-size: 14px">You'r not connected!</span>
-                    {% endif %}</span> </a>
+                        {% if app.user.email is defined %}
+                        <span class="name">{{ app.user.pseudo }}</span>
+                        {% else %}
+                        <span class="name" style="font-size: 14px">You'r not connected!</span>
+                        {% endif %}</span> </a>
 
-            <div class="nav_list">
-                <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
-                <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                <a href="{{ path('new_theme') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Theme</span> </a>
-                <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
-        </div> <a href="{{ path('app_logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log out ...</span> </a>
-    </nav>
-</div>
-<!--Container Main start-->
-<div class="height-100 bg-light">
+                <div class="nav_list">
+                    <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
+                    <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                    <a href="{{ path('new_theme') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Theme</span> </a>
+                    <a href="{{ path('user-list') }}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
+            </div> <a href="{{ path('app_logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log out ...</span> </a>
+        </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="height-100 bg-light">
 
-    <h1 class="PageTitle">{% block Titlebody %} {% endblock %}</h1>
-    <div class="DivContainer">{% block body %}{% endblock %}</div>
+        <h1 class="PageTitle">{% block Titlebody %} {% endblock %}</h1>
+        <div class="DivContainer">{% block body %}{% endblock %}</div>
 
-</div>
+    </div>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
     <script>
 
-        {% block JSAfterBody %}
+            {% block JSAfterBody %}
 
-        {% endblock %}
+            {% endblock %}
 
-        document.addEventListener("DOMContentLoaded", function(event) {
+            document.addEventListener("DOMContentLoaded", function(event) {
 
-            const showNavbar = (toggleId, navId, bodyId, headerId) =>{
-                const
-                    toggle = document.getElementById(toggleId),
-                    nav = document.getElementById(navId),
-                    bodypd = document.getElementById(bodyId),
-                    headerpd = document.getElementById(headerId)
+                const showNavbar = (toggleId, navId, bodyId, headerId) =>{
+                    const
+                        toggle = document.getElementById(toggleId),
+                        nav = document.getElementById(navId),
+                        bodypd = document.getElementById(bodyId),
+                        headerpd = document.getElementById(headerId)
 
-                if(toggle && nav && bodypd && headerpd){
-                    toggle.addEventListener('click', ()=>{
-                        nav.classList.toggle('show')
-                        toggle.classList.toggle('bx-x')
-                        bodypd.classList.toggle('body-pd')
-                        headerpd.classList.toggle('body-pd')
-                    })
+                    if(toggle && nav && bodypd && headerpd){
+                        toggle.addEventListener('click', ()=>{
+                            nav.classList.toggle('show')
+                            toggle.classList.toggle('bx-x')
+                            bodypd.classList.toggle('body-pd')
+                            headerpd.classList.toggle('body-pd')
+                        })
+                    }
                 }
-            }
-            showNavbar('header-toggle','nav-bar','body-pd','header')
-            /*===== LINK ACTIVE =====*/
-            const linkColor = document.querySelectorAll('.nav_link')
-            function colorLink(){
-                if(linkColor){
-                    linkColor.forEach(l=> l.classList.remove('active'))
-                    this.classList.add('active')
+                showNavbar('header-toggle','nav-bar','body-pd','header')
+                /*===== LINK ACTIVE =====*/
+                const linkColor = document.querySelectorAll('.nav_link')
+                function colorLink(){
+                    if(linkColor){
+                        linkColor.forEach(l=> l.classList.remove('active'))
+                        this.classList.add('active')
+                    }
                 }
-            }
-            linkColor.forEach(l=> l.addEventListener('click', colorLink))
+                linkColor.forEach(l=> l.addEventListener('click', colorLink))
+            });
+
+
+        </script>
+
+    <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+
+    {% if datatable is defined %}
+    <script>
+        $(function() {
+            $('#Datatable').initDataTables({{ datatable_settings(datatable) }});
         });
-
-
     </script>
-    </body>
+    {% endif %}
+
+</body>
 </html>

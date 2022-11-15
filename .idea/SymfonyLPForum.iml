@@ -160,11 +160,17 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-pack" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/lock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/rate-limiter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/omines/datatables-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="boxicons" level="application" />
+    <orderEntry type="library" name="datatables" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jquery-3.6.0" level="application" />
   </component>
 </module>

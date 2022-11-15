@@ -1,21 +1,26 @@
 {% extends 'base.html.twig' %}
-{% block title %}
-    Add themes !
-{% endblock %}
+{% block title %} Themes ! {% endblock %}
 
 
-{% block Titlebody %}Add a new theme to the forum{% endblock %}
+{% block Titlebody %}Theme{% endblock %}
 
 {% block body %}
     <div class="Contain50">
+        <h3> Add a new themes to the forum</h3>
+        <hr>
     {{ form_start(NewThemeForm) }}
-
 
     {{ form_row(NewThemeForm.nom) }}
 
-
     <button type="submit" class="btn btn-primary"> Add !</button>
     {{ form_end(NewThemeForm) }}
+    </div>
+
+    <div class="Contain50">
+        <h3>List of actual theme in the forum</h3>
+        <hr>
+        <div id="Datatable">Loading...</div>
+
     </div>
 {% endblock %}
 

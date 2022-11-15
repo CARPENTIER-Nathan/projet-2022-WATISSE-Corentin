@@ -295,6 +295,7 @@ header .image-text .profession{
 .PageTitle{
     text-decoration: underline var(--text-color) 2px solid;
     margin-bottom: 50px;
+    margin-top: 63px;
 }
 
 .btn-primary {
@@ -303,10 +304,11 @@ header .image-text .profession{
 }
 
 .Contain50{
-    width: 50%;
+    width: 1000px;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid var(--first-color);
+    margin: 20px 0;
 }
 
 button.btn.btn-primary{margin: 20px 0;}
