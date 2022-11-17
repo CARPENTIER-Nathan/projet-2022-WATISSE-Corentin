@@ -6,6 +6,10 @@
 parameters:
 
 services:
+    symfony_forum.activity_lister:
+        class: App\Listener\ActivityListener
+        tags:
+                - { name: kernel.event_listener, event: kernel.controller}
     Twig\Extension\StringLoaderExtension:
         tags: [ twig.extension ]
     # default configuration for services in *this* file

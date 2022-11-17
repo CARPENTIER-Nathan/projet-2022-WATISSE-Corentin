@@ -43,6 +43,7 @@
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <div class="number_of_connected"> <i class='bx bxs-user-badge'></i> <p id="pers"> 0 </p> </div>
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
@@ -111,7 +112,31 @@
                     }
                 }
                 linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
+
             });
+
+            $(document).ready(function(){
+                // ConnectedPerson();
+            });
+
+            function ConnectedPerson()
+            {
+                $.ajax({
+                    url: '/number_of_connected',
+                    success: function(data, status)
+                    {
+                            console.log("Connected person : " + data);
+                            $("#pers").replaceWith("<p id='pers'>" + data + "</p>");
+                            setTimeout(function(){ConnectedPerson();}, 2000);
+
+
+                    },
+                    async:   true
+                });
+            }
+
+
 
 
         </script>

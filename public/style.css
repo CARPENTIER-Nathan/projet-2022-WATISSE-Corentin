@@ -312,3 +312,11 @@ header .image-text .profession{
 }
 
 button.btn.btn-primary{margin: 20px 0;}
+
+.number_of_connected {
+    display: flex;
+    align-items: baseline;
+    background: var(--primary-color);
+}
+
+.number_of_connected
