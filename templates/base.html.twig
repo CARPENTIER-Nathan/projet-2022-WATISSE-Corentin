@@ -56,9 +56,15 @@
 
                 <div class="nav_list">
                     <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
-                    <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                    <a href="{{ path('new_theme') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Theme</span> </a>
-                    <a href="{{ path('user-list') }}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
+                    {% if app.user.roles.0 is defined %}
+                        <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">My informations</span> </a>
+                        {% if app.user.roles is defined and app.user.roles.0 == "ROLE_ADMIN" %}
+                        <a href="{{ path('new_theme') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Themes</span> </a>
+                        <a href="{{ path('user-list') }}" class="nav_link"> <i class='bx bx-list-ul nav_icon'></i> <span class="nav_name">Users</span> </a> </div>
+                        {% endif %}
+                    {% endif %}
+
+
             </div> <a href="{{ path('app_logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log out ...</span> </a>
         </nav>
     </div>

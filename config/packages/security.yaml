@@ -42,6 +42,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/new_theme, roles: ROLE_ADMIN }
+        - { path: ^/user-list, roles: ROLE_ADMIN }
+        - { path: ^/user_informations, roles: ROLE_USER }
+
 
 when@test:
     security:
