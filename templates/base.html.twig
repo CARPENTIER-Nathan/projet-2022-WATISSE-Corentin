@@ -43,7 +43,7 @@
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="number_of_connected"> <i class='bx bxs-user-badge'></i> <p id="pers"> 0 </p> </div>
+        <div class="number_of_connected"> <i class='bx bxs-user-badge'></i> <p id="pers_textr"> Numbers of connected : </p><p id="pers"> 0 </p> </div>
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
@@ -56,7 +56,7 @@
                         {% endif %}</span> </a>
 
                 <div class="nav_list">
-                    <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
+                    <a href="#" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
                     {% if app.user.roles.0 is defined %}
                         <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">My informations</span> </a>
                         {% if app.user.roles is defined and app.user.roles.0 == "ROLE_ADMIN" %}
@@ -79,11 +79,11 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
     <script>
-
             {% block JSAfterBody %}
 
             {% endblock %}
 
+            /* --- Menu --- */
             document.addEventListener("DOMContentLoaded", function(event) {
 
                 const showNavbar = (toggleId, navId, bodyId, headerId) =>{
@@ -103,21 +103,13 @@
                     }
                 }
                 showNavbar('header-toggle','nav-bar','body-pd','header')
-                /*===== LINK ACTIVE =====*/
-                const linkColor = document.querySelectorAll('.nav_link')
-                function colorLink(){
-                    if(linkColor){
-                        linkColor.forEach(l=> l.classList.remove('active'))
-                        this.classList.add('active')
-                    }
-                }
-                linkColor.forEach(l=> l.addEventListener('click', colorLink))
-
-
             });
 
+
+
+            /* --- Appel AJAX pour avoir le nombre de personne connecté --- */
             $(document).ready(function(){
-                // ConnectedPerson();
+                ConnectedPerson();
             });
 
             function ConnectedPerson()
@@ -129,25 +121,21 @@
                             console.log("Connected person : " + data);
                             $("#pers").replaceWith("<p id='pers'>" + data + "</p>");
                             setTimeout(function(){ConnectedPerson();}, 2000);
-
-
                     },
                     async:   true
                 });
             }
-
-
-
-
         </script>
 
     <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 
     {% if datatable is defined %}
     <script>
+        /* --- Affiche la datatable de la page s'il y'en à une --- */
         $(function() {
             $('#Datatable').initDataTables({{ datatable_settings(datatable) }});
         });
+
     </script>
     {% endif %}
 

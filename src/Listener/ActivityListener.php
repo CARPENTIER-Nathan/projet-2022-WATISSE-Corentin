@@ -3,10 +3,8 @@
 namespace App\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -27,14 +25,19 @@ class ActivityListener
 
     public function onKernelController(ControllerEvent $event)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+       try {
+           $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($user instanceof UserInterface) {
-            $user->setLastActivityAt(new \DateTime());
+           if ($user instanceof UserInterface) {
+               $user->setLastActivityAt(new \DateTime());
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+               $this->entityManager->persist($user);
+               $this->entityManager->flush();
 
-        }
+           }
+       } finally {
+           return;
+       }
+
     }
 }

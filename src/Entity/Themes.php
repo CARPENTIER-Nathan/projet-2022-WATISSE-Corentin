@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ThemesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ThemesRepository::class)]
@@ -15,6 +17,14 @@ class Themes
 
     #[ORM\Column(length: 255)]
     private ?string $Nom = null;
+
+    #[ORM\OneToMany(targetEntity: Discussions::class, mappedBy: 'id')]
+    private $Discussions = null;
+
+    public function __construct()
+    {
+        $this->Discussions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -32,4 +42,37 @@ class Themes
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Discussions>
+     */
+    public function getDiscussions(): Collection
+    {
+        return $this->Discussions;
+    }
+
+    public function addDiscussion(Discussions $discussion): self
+    {
+        if (!$this->Discussions->contains($discussion)) {
+            $this->Discussions->add($discussion);
+            $discussion->setTheme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscussion(Discussions $discussion): self
+    {
+        if ($this->Discussions->removeElement($discussion)) {
+            // set the owning side to null (unless already changed)
+            if ($discussion->getTheme() === $this) {
+                $discussion->setTheme(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }
