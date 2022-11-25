@@ -25,8 +25,14 @@ class Discussions
     #[ORM\Column(length: 255)]
     private ?string $Createur = null;
 
-    #[ORM\ManyToOne(targetEntity: Themes::class, inversedBy: 'id')]
-    private $Theme = null;
+    #[ORM\ManyToOne(targetEntity: 'Themes', inversedBy: 'Discussions')]
+    #[ORM\JoinColumn(name:"themes_id", referencedColumnName:"id", nullable:false)]
+    protected $Theme = null;
+
+    #[ORM\ManyToOne(targetEntity: 'User', inversedBy: 'Discussions')]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable:false)]
+    protected $User = null;
+
 
     public function getId(): ?int
     {
@@ -89,6 +95,18 @@ class Discussions
     public function setTheme(?Themes $Theme): self
     {
         $this->Theme = $Theme;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

@@ -24,6 +24,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'User')]
+    protected $Discussions;
+
     /**
      * @var string The hashed password
      */

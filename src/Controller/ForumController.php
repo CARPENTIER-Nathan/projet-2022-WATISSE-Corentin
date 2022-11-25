@@ -23,13 +23,14 @@ class ForumController extends AbstractController
 
 
             ->createAdapter(ORMAdapter::class, [
-                'entity' => \App\Entity\Themes::class,
+                'entity' => Themes::class,
                 'query' => function(QueryBuilder $builder) {
                 $builder
+                    ->distinct()
                     ->select('e')
                     ->from(Themes::class, 'e')
                     ->leftJoin('e.Discussions', 'c')
-                    ->where('e = c.theme');
+                    ->where('e.id = c.Theme');
                 }
             ])
             ->handleRequest($request);

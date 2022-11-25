@@ -18,8 +18,8 @@ class Themes
     #[ORM\Column(length: 255)]
     private ?string $Nom = null;
 
-    #[ORM\OneToMany(targetEntity: Discussions::class, mappedBy: 'id')]
-    private $Discussions = null;
+    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'Theme')]
+    protected $Discussions;
 
     public function __construct()
     {

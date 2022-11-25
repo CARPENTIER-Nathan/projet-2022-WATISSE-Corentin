@@ -199,3 +199,5 @@ button.btn.btn-primary{margin: 20px 0;}
 
 .number_of_connected #pers_textr { margin-top: 15px;}
 .number_of_connected .bx{ margin-right: 10px; padding-left: 20px;}
+
+div#registration_form_captcha { position: absolute; margin: -70px 0 -0 655px;}

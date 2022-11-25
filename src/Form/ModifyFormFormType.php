@@ -16,12 +16,12 @@ class ModifyFormFormType extends AbstractType
     {
         $builder
             ->add('email',     TextType::class, array ('attr' => array ('readonly' => true)))
-            ->add('pseudo',    TextType::class ,array ('attr' => array ('require' => false)))
-            ->add('nom',       TextType::class ,array ('attr' => array ('require' => false)))
-            ->add('prenom',    TextType::class ,array ('attr' => array ('require' => false)))
-            ->add('age',       NumberType::class ,array ('attr' => array ('require' => false)))
-            ->add('telephone', TelType::class ,array ('attr' => array ('require' => false)))
-            ->add('ville',     TextType::class ,array ('attr' => array ('require' => false)))
+            ->add('pseudo',    TextType::class ,['required'=>true])
+            ->add('nom',       TextType::class ,['required'=>true])
+            ->add('prenom',    TextType::class ,['required'=>true])
+            ->add('age',       NumberType::class ,['required'=>true])
+            ->add('telephone', TelType::class ,['required'=>true])
+            ->add('ville',     TextType::class ,['required'=>true])
         ;
     }
 
