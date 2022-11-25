@@ -27,11 +27,11 @@ class Discussions
 
     #[ORM\ManyToOne(targetEntity: 'Themes', inversedBy: 'Discussions')]
     #[ORM\JoinColumn(name:"themes_id", referencedColumnName:"id", nullable:false)]
-    protected $Theme = null;
+    public $Theme = null;
 
     #[ORM\ManyToOne(targetEntity: 'User', inversedBy: 'Discussions')]
     #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable:false)]
-    protected $User = null;
+    public $Use = null;
 
 
     public function getId(): ?int

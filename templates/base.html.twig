@@ -62,7 +62,7 @@
                         {% endif %}</span> </a>
 
                 <div class="nav_list">
-                    <a href="#" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
+                    <a href="{{ path('forum_theme') }}" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Forum</span> </a>
                     {% if app.user.roles.0 is defined %}
                         <a href="{{ path('user_informations') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">My informations</span> </a>
                         {% if app.user.roles is defined and app.user.roles.0 == "ROLE_ADMIN" %}
@@ -128,8 +128,10 @@
 
             /* --- Appel AJAX pour avoir le nombre de personne connecté --- */
             $(document).ready(function(){
-                ConnectedPerson();
+                // ConnectedPerson();
             });
+
+
 
             function ConnectedPerson()
             {
@@ -150,12 +152,56 @@
 
     {% if datatable is defined %}
     <script>
-        /* --- Affiche la datatable de la page s'il y'en à une --- */
         $(function() {
-            $('#Datatable').initDataTables({{ datatable_settings(datatable) }});
+            $('#Datatable').initDataTables({{ datatable_settings(datatable) }},
+            {
+                "pageLength": 10,
+                columnDefs: [
+                {width: "8%", targets: 0},
+            ]
+            } );
         });
 
     </script>
+    {% endif %}
+
+    {% if datatableTheme is defined %}
+        <script>
+            $(function() {
+                $('#Datatable').initDataTables({{ datatable_settings(datatableTheme) }},
+                    {
+                        "pageLength": 5,
+                        "lengthMenu": [5, 10, 25, 50, 100],
+                        columnDefs: [
+                            {width: "8%", targets: 0},
+                        ]
+                    } );
+            });
+
+        </script>
+    {% endif %}
+
+
+    {% if datatableDiscussions is defined %}
+        <script>
+            $(function() {
+                $('#Datatable').initDataTables({{ datatable_settings(datatableDiscussions) }},
+                    {
+                        "pageLength": 10,
+                        "lengthMenu": [10, 25, 50, 100],
+
+                            columnDefs: [
+                                {width: "4%", targets: 0},
+                                {width: "60%", targets: 1},
+                                {width: "12%", targets: 2},
+                                {width: "12%", targets: 3},
+                                {width: "12%", targets: 4},
+
+                        ]
+                    } );
+            });
+
+        </script>
     {% endif %}
 
 </body>
