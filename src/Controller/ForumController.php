@@ -16,8 +16,6 @@ use Omines\DataTablesBundle\Column\TwigStringColumn;
 use Omines\DataTablesBundle\DataTableFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -122,8 +120,8 @@ class ForumController extends AbstractController
 
             $discussions->setContenu($form->get('Contenu')->getData());
             $discussions->setCreateur($users->getEmail());
-            $discussions->setDateCreation(date('j M Y - h:i:s'));
-            $discussions->setDateModification(date('j M Y - h:i:s'));
+            $discussions->setDateCreation(date('j M Y - H:i:s'));
+            $discussions->setDateModification(date('j M Y - H:i:s'));
             $discussions->setTheme($themes);
             $discussions->setUser($users);
 

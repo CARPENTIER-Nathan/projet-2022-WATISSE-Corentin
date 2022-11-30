@@ -12,9 +12,34 @@
 
     </div>
 
+    {% block data_tables %}
+        {% if datatableDiscussions is defined %}
+        <script>
+            $(function() {
+                $('#Datatable').initDataTables({{ datatable_settings(datatableDiscussions) }},
+                    {
+                        "pageLength": 10,
+                        "lengthMenu": [10, 25, 50, 100],
+
+                        columnDefs: [
+                            {width: "64%", targets: 0},
+                            {width: "12%", targets: 1},
+                            {width: "12%", targets: 2},
+                            {width: "12%", targets: 3},
+
+                        ]
+                    } );
+            });
+
+        </script>
+        {% endif %}
+    {% endblock %}
+
 {% if app.user.roles is defined %}
     {{ render(controller('App\\Controller\\ForumController::newDiscussions', {'theme': theme, 'request': app.request } )) }}
 {% endif %}
+
+
 
 
 {% endblock %}

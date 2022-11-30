@@ -50,7 +50,7 @@ class ThemeController extends AbstractController
 
         return $this->render('forms/newTheme.html.twig', [
             'NewThemeForm' => $form->createView(),
-            'datatable' => $table,
+            'datatableThemeList' => $table,
         ]);
     }
 

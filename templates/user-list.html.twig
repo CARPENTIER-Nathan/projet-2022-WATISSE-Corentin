@@ -11,4 +11,21 @@
 
     </div>
 
+    {% block data_tables %}
+        {% if datatableUserList is defined %}
+            <script>
+                $(function() {
+                    $('#Datatable').initDataTables({{ datatable_settings(datatableUserList) }},
+                        {
+                            "pageLength": 10,
+                            columnDefs: [
+                                {width: "8%", targets: 0},
+                            ]
+                        } );
+                });
+
+            </script>
+        {% endif %}
+    {% endblock %}
+
 {% endblock %}

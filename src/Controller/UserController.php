@@ -36,7 +36,7 @@ class UserController extends AbstractController
             return $table->getResponse();
         }
 
-        return $this->render('user-list.html.twig', ['datatable' => $table]);
+        return $this->render('user-list.html.twig', ['datatableUserList' => $table]);
     }
 
 

@@ -124,15 +124,12 @@
                 showNavbar('header-toggle','nav-bar','body-pd','header')
             });
 
-
-
             /* --- Appel AJAX pour avoir le nombre de personne connecté --- */
             $(document).ready(function(){
                 ConnectedPerson();
             });
 
-
-
+            /* --- Fonction pour avoir le nombre de personne connecté --- */
             function ConnectedPerson()
             {
                 $.ajax({
@@ -150,58 +147,6 @@
 
     <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 
-    {% if datatable is defined %}
-    <script>
-        $(function() {
-            $('#Datatable').initDataTables({{ datatable_settings(datatable) }},
-            {
-                "pageLength": 10,
-                columnDefs: [
-                {width: "8%", targets: 0},
-            ]
-            } );
-        });
-
-    </script>
-    {% endif %}
-
-    {% if datatableTheme is defined %}
-        <script>
-            $(function() {
-                $('#Datatable').initDataTables({{ datatable_settings(datatableTheme) }},
-                    {
-                        "pageLength": 5,
-                        "lengthMenu": [5, 10, 25, 50, 100],
-                        columnDefs: [
-                            {width: "8%", targets: 0},
-                        ]
-                    } );
-            });
-
-        </script>
-    {% endif %}
-
-
-    {% if datatableDiscussions is defined %}
-        <script>
-            $(function() {
-                $('#Datatable').initDataTables({{ datatable_settings(datatableDiscussions) }},
-                    {
-                        "pageLength": 10,
-                        "lengthMenu": [10, 25, 50, 100],
-
-                            columnDefs: [
-                                {width: "64%", targets: 0},
-                                {width: "12%", targets: 1},
-                                {width: "12%", targets: 2},
-                                {width: "12%", targets: 3},
-
-                        ]
-                    } );
-            });
-
-        </script>
-    {% endif %}
-
+    {% block data_tables %} {% endblock %}
 </body>
 </html>

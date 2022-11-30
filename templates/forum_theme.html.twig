@@ -12,4 +12,22 @@
 
     </div>
 
+    {% block data_tables %}
+        {% if datatableTheme is defined %}
+            <script>
+                $(function() {
+                    $('#Datatable').initDataTables({{ datatable_settings(datatableTheme) }},
+                        {
+                            "pageLength": 5,
+                            "lengthMenu": [5, 10, 25, 50, 100],
+                            columnDefs: [
+                                {width: "8%", targets: 0},
+                            ]
+                        } );
+                });
+
+            </script>
+        {% endif %}
+    {% endblock %}
+
 {% endblock %}

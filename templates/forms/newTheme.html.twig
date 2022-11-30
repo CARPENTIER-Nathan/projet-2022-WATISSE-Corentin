@@ -22,6 +22,24 @@
         <div id="Datatable">Loading...</div>
 
     </div>
+
+    {% block data_tables %}
+        {% if datatableThemeList is defined %}
+            <script>
+                $(function() {
+                    $('#Datatable').initDataTables({{ datatable_settings(datatableThemeList) }},
+                        {
+                            "pageLength": 10,
+                            columnDefs: [
+                                {width: "8%", targets: 0},
+                            ]
+                        } );
+                });
+
+            </script>
+        {% endif %}
+
+    {% endblock %}
 {% endblock %}
 
 
