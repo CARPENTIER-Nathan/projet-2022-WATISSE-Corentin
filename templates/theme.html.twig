@@ -12,4 +12,9 @@
 
     </div>
 
+{% if app.user.roles is defined %}
+    {{ render(controller('App\\Controller\\ForumController::newDiscussions', {'theme': theme, 'request': app.request } )) }}
+{% endif %}
+
+
 {% endblock %}

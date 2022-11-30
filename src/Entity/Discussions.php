@@ -16,10 +16,10 @@ class Discussions
     #[ORM\Column(length: 999)]
     private ?string $Contenu = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 30)]
     private ?string $DateCreation = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 30)]
     private ?string $DateModification = null;
 
     #[ORM\Column(length: 255)]
@@ -101,12 +101,12 @@ class Discussions
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->Use;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?User $Use): self
     {
-        $this->User = $User;
+        $this->Use = $Use;
 
         return $this;
     }

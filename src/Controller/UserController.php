@@ -23,6 +23,7 @@ class UserController extends AbstractController
             ->add('Nom', TextColumn::class, ['field' => 'user.Nom', 'label' => "Nom"])
             ->add('Prenom', TextColumn::class, ['field' => 'user.Prenom', 'label' => "Prenom"])
             ->add('is_verified', TextColumn::class, ['field' => 'user.isVerified', 'label' => 'Is verified ?'])
+
             ->add('link', TwigStringColumn::class, ['label' => 'Delete', 'template' => "<a href='/delete_user/{{ row.id }}'> <i class='bx bx-message-alt-x'></i> </a>"])
 
 

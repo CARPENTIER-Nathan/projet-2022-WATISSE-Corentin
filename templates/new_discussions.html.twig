@@ -1,0 +1,20 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}New discussions{% endblock %}#}
+
+{#{% block Titlebody %} New discussions {% endblock %}#}
+
+{#{% block body %}#}
+{#    {% for flash_error in app.flashes('verify_email_error') %}#}
+{#        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>#}
+{#    {% endfor %}#}
+<div class="Contain50">
+    {{ form_start(newDiscussions) }}
+        {{ form_row(newDiscussions.Contenu) }}
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(newDiscussions) }}
+</div>
+
+
+{#{% endblock %}#}
