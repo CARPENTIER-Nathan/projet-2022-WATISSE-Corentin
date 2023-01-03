@@ -23,6 +23,7 @@
         {% endblock %}
 
 
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
 {#            <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>#}
@@ -163,7 +164,45 @@
                    });
             } );
 
-            </script>
+            $(document).on('click','.delete_comm',function (e){
+                if(!confirm('Do you really want to delete this comment ?')){
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+
+                }
+            })
+
+            $(document).on('click','.modify_comm',function (e){
+
+                console.log($(this).attr('data-id'));
+                $('#modifyComment').val($(this).attr('data-comment'));
+                $('#modifyComment').attr('data-id',$(this).attr('data-id'));
+
+
+            })
+
+            $(document).on('click','#saveChange',function (e){
+                let com = $('#modifyComment').val();
+                let id = $('#modifyComment').attr('data-id');
+
+                $.ajax({
+                    url: '/update_comment',
+                    data:{
+                        id: id,
+                        comment: com
+                    },
+                    success: function()
+                    {
+                        location.reload();
+                    }
+                });
+            })
+
+
+
+
+        </script>
 
 
     <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>

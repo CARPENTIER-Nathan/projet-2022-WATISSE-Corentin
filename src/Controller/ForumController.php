@@ -40,13 +40,8 @@ class ForumController extends AbstractController
 
                 }
             ])
-
 //            ->add('last comment', TextColumn::class, ['field' => 'themes.Discussions.DateModifications', 'label' => "Last comment"])
             ->add('theme_name', TwigStringColumn::class, ['label' => 'Theme', 'template' => "<a href='/forum/theme/{{ row.Nom }}'> {{ row.Nom }} </a>"])
-
-
-
-
             ->handleRequest($request);
 
         if ($table->isCallback()) {
@@ -71,11 +66,16 @@ class ForumController extends AbstractController
                         ->add('Contenu', TextColumn::class, ['field' => 'discussions.Contenu', 'label' => "Contenu"])
                         ->add('Creation date', TextColumn::class, ['field' => 'discussions.DateCreation', 'label' => "Creation date"])
                         ->add('Last modification date', TextColumn::class, ['field' => 'discussions.DateModification', 'label' => "Modification date"])
-                        ->add('Creator', TextColumn::class, ['field' => 'discussions.Use.Email', 'label' => 'Creator'])
+                        ->add('Creator', TextColumn::class, ['field' => 'discussions.Use.Email', 'label' => 'Creator']);
 
+                    if ($this->getUser()->getRoles()[0] == "ROLE_ADMIN") {
+                        $table ->add('link', TwigStringColumn::class, ['label' => 'Delete', 'template' => "<a class='btn btn-primary delete_comm' href='/delete/discussions/{{ row.id }}'> <i class='bx bx-message-alt-x'></i></a>   <button type='button' class='btn btn-primary modify_comm' data-id='{{row.id}}' data-comment='{{row.contenu}}' data-bs-toggle='modal' data-bs-target='#exampleModal'> <i class='fa-solid fa-pen-to-square'></i>  </button>
+ 
+"]);
 
+                    }
 
-                        ->createAdapter(ORMAdapter::class, [
+                    $table  ->createAdapter(ORMAdapter::class, [
                             'entity' => \App\Entity\Discussions::class,
                             'query' => function(QueryBuilder $builder) use ($themeID) {
                                 $builder
@@ -138,5 +138,45 @@ class ForumController extends AbstractController
         return $this->render('new_discussions.html.twig', [
             'newDiscussions' => $form->createView(),
         ]);
+    }
+
+    #[Route('/delete/discussions/{theme}', name:'forum_delete_discussions_')]
+    function deleteDiscussions($theme, Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine) {
+
+
+        $entityManager = $doctrine->getManager();
+        $product = $entityManager->getRepository(Discussions::class)->find($theme);
+        $th = $product->getTheme()->getNom();
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$theme
+            );
+        }
+
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        return $this->redirect('/forum/theme/'.str_replace(' ','%20',$th));
+    }
+
+    #[Route('/update_comment', name:'update_comment')]
+    function updateDiscussions( Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine)
+    {
+        $id = $request->query->get('id');
+        $com = $request->query->get('comment');
+
+        $entityManager = $doctrine->getManager();
+        $comment = $entityManager->getRepository(Discussions::class)->find($id);
+        $th = $comment->getTheme()->getNom();
+
+
+        $comment->setContenu($com);
+        $comment->setDateModification(date('j M Y - H:i:s'));
+        $entityManager->persist($comment);
+        $entityManager->flush();
+
+        return $this->redirect('/forum/theme/'.str_replace(' ','%20',$th));
+
     }
 }
