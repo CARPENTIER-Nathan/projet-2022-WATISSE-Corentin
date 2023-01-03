@@ -18,7 +18,7 @@ class Themes
     #[ORM\Column(length: 255)]
     private ?string $Nom = null;
 
-    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'Theme', fetch:"EXTRA_LAZY")]
+    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'Theme', fetch:"EXTRA_LAZY", cascade:['persist', 'remove'] )]
     public $Discussions;
 
     public function __construct()

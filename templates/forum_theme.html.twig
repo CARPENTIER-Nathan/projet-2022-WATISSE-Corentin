@@ -18,6 +18,9 @@
                 $(function() {
                     $('#Datatable').initDataTables({{ datatable_settings(datatableTheme) }},
                         {
+                            "emptyTable": "Aucune donnée disponible dans le tableau",
+                            "loadingRecords": "Chargement...",
+                            "processing": "Traitement...",
                             "pageLength": 5,
                             "lengthMenu": [5, 10, 25, 50, 100],
                             columnDefs: [

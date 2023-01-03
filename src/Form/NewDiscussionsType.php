@@ -13,7 +13,9 @@ class NewDiscussionsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Contenu', TextareaType::class)
+            ->add('Contenu', TextareaType::class, array(
+                'attr' => array('maxlength' => 5000),
+            ));
 //            ->add('DateCreation')
 //            ->add('DateModification')
 //            ->add('Createur')

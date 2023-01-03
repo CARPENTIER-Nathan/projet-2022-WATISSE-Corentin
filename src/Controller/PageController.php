@@ -19,7 +19,6 @@ class PageController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
     function homepage() {
-//        return $this->render('base.html.twig');
         return $this->redirectToRoute('forum_theme');
     }
 

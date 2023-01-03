@@ -17,6 +17,8 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
         {% endblock %}
 
@@ -97,10 +99,11 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
     ></script>
-    <script>
             {% block JSAfterBody %}
 
             {% endblock %}
+    <script>
+
 
             /* --- Menu --- */
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -144,6 +147,24 @@
                 });
             }
         </script>
+
+        <script>
+
+            /* --- Fonction pour avoir l'auto complete des villes --- */
+
+            {% if MonTabDeVille is not defined %}
+            {% set MonTabDeVille = "" %}
+            {% endif %}
+
+            $( function() {
+               var availableTags = {{ MonTabDeVille|raw }}
+                   $( "#modify_form_form_ville" ).autocomplete({
+                       source: availableTags
+                   });
+            } );
+
+            </script>
+
 
     <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 

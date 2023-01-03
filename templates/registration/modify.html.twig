@@ -28,12 +28,7 @@
 {% endblock %}
 
 {% block JSAfterBody %}
-        $( function() {
-            var availableTags = {{ MonTabDeVille|raw }}
-            $( "#modify_form_form_ville" ).autocomplete({
-                source: availableTags
-            });
-        } );
+
 {% endblock %}
 
 

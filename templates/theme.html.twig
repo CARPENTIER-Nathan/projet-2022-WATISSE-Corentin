@@ -12,6 +12,7 @@
 
     </div>
 
+
     {% block data_tables %}
         {% if datatableDiscussions is defined %}
         <script>
@@ -36,10 +37,37 @@
     {% endblock %}
 
 {% if app.user.roles is defined %}
+    <div class="">
+    <div id="open" class="open"> Let's add new comment ! </div>
+{#    <div id="close"> <i class="fa-solid fa-xmark"></i> </div>#}
     {{ render(controller('App\\Controller\\ForumController::newDiscussions', {'theme': theme, 'request': app.request } )) }}
+    </div>
+{#    <i class="fa-solid fa-chevron-up"></i>#}
+
 {% endif %}
 
+{% endblock %}
+{% block JSAfterBody %}
+
+    /* --- Fonction pour faire apparaitre / disparaitre la section new comment --- */
+
+
+    <script>
+    $('.Contain50').hide();
+
+    $('#open').on('click',function(e){
+        if ($('.Contain50').is(":visible"))   {
+            $('.Contain50').hide('fast');
+            $('#new_discussions_Contenu').val('');
+            $('#open').html("Let's add new comment !");
+
+        }else {
+            $('.Contain50').show('fast');
+            $('#open').html("<i class='fa-solid fa-chevron-up'></i>");
 
 
 
+        }
+    })
+</script>
 {% endblock %}
