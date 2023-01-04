@@ -203,7 +203,6 @@ class ForumController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $theme = $entityManager->getRepository(Discussions::class);
-       ;
 
         $numberOfComment = $theme->createQueryBuilder('u')
             ->select('count(u.id)')
