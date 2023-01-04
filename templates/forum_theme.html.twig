@@ -5,6 +5,27 @@
 {% block Titlebody %}List of themes {% endblock %}
 
 {% block body %}
+
+    <button type='button' style="opacity: 0" class='btn btn-primary' id="loader" data-bs-toggle='modal' data-bs-target='#exampleModal'> </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p> Loading ... </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="opacity: 0" id="removeLoader" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="Contain50">
         <h3> Choose a theme and go ! </h3>
         <hr>
@@ -12,21 +33,75 @@
 
     </div>
 
+
+
     {% block data_tables %}
         {% if datatableTheme is defined %}
+
             <script>
+                $('#loader').trigger('click');
+
+                function removeLoader(){
+                    $('#removeLoader').trigger('click');
+
+                }
+
+                function lastComment() {
+                    $( ".lastComment" ).each(function( index ) {
+                        let here = $(this);
+                        $.ajax({
+                            url: '/last_comment',
+                            data:{
+                              idTheme : $( this ).attr('data-id'),
+                            },
+                            success: function(data, status)
+                            {
+                                here.replaceWith("<p> " + data.data + "</p>");
+                            },
+                        });
+                    });
+                    setTimeout(function(){lastComment();}, 2000);
+                }
+
+                function numberOfComment() {
+                    $(".numberOfComment").each(function (index) {
+                        let here = $(this);
+                        $.ajax({
+                            url: '/number_of_comment',
+                            data: {
+                                idTheme: $(this).attr('data-id'),
+                            },
+                            success: function (data, status) {
+                                here.replaceWith("<p> " + data.data[0][1] + "</p>");
+                            },
+                        });
+                    });
+                    setTimeout(function(){numberOfComment();}, 2000);
+                }
+
                 $(function() {
                     $('#Datatable').initDataTables({{ datatable_settings(datatableTheme) }},
                         {
                             "pageLength": 5,
+                            "serverSide": false,
                             "lengthMenu": [5, 10, 25, 50, 100],
                             columnDefs: [
-                                {width: "8%", targets: 0},
-                            ]
+                                {width: "60%", targets: 0},
+                                {width: "20%", targets: 1},
+                                {width: "20%", targets: 2},
+                            ],
+                            "initComplete":function( settings, json){
+                                lastComment();
+                                numberOfComment();
+                                removeLoader();
+                            }
                         } );
                 });
 
+
+
             </script>
+
         {% endif %}
     {% endblock %}
 

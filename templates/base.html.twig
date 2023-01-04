@@ -104,8 +104,6 @@
 
             {% endblock %}
     <script>
-
-
             /* --- Menu --- */
             document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -180,27 +178,7 @@
                 $('#modifyComment').attr('data-id',$(this).attr('data-id'));
 
 
-            })
-
-            $(document).on('click','#saveChange',function (e){
-                let com = $('#modifyComment').val();
-                let id = $('#modifyComment').attr('data-id');
-
-                $.ajax({
-                    url: '/update_comment',
-                    data:{
-                        id: id,
-                        comment: com
-                    },
-                    success: function()
-                    {
-                        location.reload();
-                    }
-                });
-            })
-
-
-
+            });
 
         </script>
 
@@ -208,5 +186,10 @@
     <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 
     {% block data_tables %} {% endblock %}
+
+
+
+
+
 </body>
 </html>

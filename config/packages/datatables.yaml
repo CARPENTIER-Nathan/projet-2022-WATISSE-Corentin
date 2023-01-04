@@ -7,6 +7,7 @@ datatables:
         lengthMenu : [5, 10, 25, 50, 100, 250, 500, 1000, 2500]
 #        pageLength: 10
         dom: "<'row' <'col-sm-12' tr>><'row' <'col-sm-6'l><'col-sm-6 text-right'pi>>"
+        serverSide: false
 
     template_parameters:
         # Example classes to integrate nicely with Bootstrap 3.x

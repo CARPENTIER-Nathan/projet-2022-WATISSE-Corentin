@@ -14,7 +14,9 @@ use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\Column\TwigStringColumn;
 use Omines\DataTablesBundle\DataTableFactory;
+use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -42,6 +44,9 @@ class ForumController extends AbstractController
             ])
 //            ->add('last comment', TextColumn::class, ['field' => 'themes.Discussions.DateModifications', 'label' => "Last comment"])
             ->add('theme_name', TwigStringColumn::class, ['label' => 'Theme', 'template' => "<a href='/forum/theme/{{ row.Nom }}'> {{ row.Nom }} </a>"])
+            ->add('last comment', TwigStringColumn::class, ['label' => 'Last comment', 'template' => "<p class='lastComment' data-id='{{ row.id }}'> </p>"])
+            ->add('number of comment', TwigStringColumn::class, ['label' => "Count", 'template' => "<p class='numberOfComment' data-id='{{ row.id }}'>  </p>"])
+
             ->handleRequest($request);
 
         if ($table->isCallback()) {
@@ -178,5 +183,35 @@ class ForumController extends AbstractController
 
         return $this->redirect('/forum/theme/'.str_replace(' ','%20',$th));
 
+    }
+
+    #[Route('/last_comment', name:'last_comment')]
+    function lastComment( Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine)
+    {
+        $idTheme = $request->query->get('idTheme');
+
+        $entityManager = $doctrine->getManager();
+        $theme = $entityManager->getRepository(Discussions::class)->findOneBy(['Theme' => $idTheme], ['id' => 'DESC']);
+
+        return new JsonResponse(['data' => ($theme->getDateModification() != null ? $theme->getDateModification():  "No comment yet")]);
+    }
+
+    #[Route('/number_of_comment', name:'number_of_comment')]
+    function numberOfComment( Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine)
+    {
+        $idTheme = $request->query->get('idTheme');
+
+        $entityManager = $doctrine->getManager();
+        $theme = $entityManager->getRepository(Discussions::class);
+       ;
+
+        $numberOfComment = $theme->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->where('u.Theme = :test')
+            ->setParameter('test', $idTheme)
+            ->getQuery()
+            ->getResult();
+
+        return new JsonResponse(['data' => $numberOfComment]);
     }
 }
