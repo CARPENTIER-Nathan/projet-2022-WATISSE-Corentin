@@ -111,5 +111,17 @@ class Discussions
         return $this;
     }
 
+    public function getUse(): ?User
+    {
+        return $this->Use;
+    }
+
+    public function setUse(?User $Use): self
+    {
+        $this->Use = $Use;
+
+        return $this;
+    }
+
 
 }

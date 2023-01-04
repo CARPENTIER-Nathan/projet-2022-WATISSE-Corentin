@@ -35,8 +35,8 @@
     {% endblock %}
 
 {% if app.user.roles is defined %}
-    <div class="">
-    <div id="open" class="open"> Let's add new comment ! </div>
+    <div class="" style="margin-bottom: 20px">
+    <div id="open" class="open btn btn-primary" style="margin-bottom: 10px"> Let's add new comment ! </div>
 {#    <div id="close"> <i class="fa-solid fa-xmark"></i> </div>#}
     {{ render(controller('App\\Controller\\ForumController::newDiscussions', {'theme': theme, 'request': app.request } )) }}
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
@@ -44,7 +45,7 @@ class UserController extends AbstractController
     function deleteTheme($id, EntityManagerInterface $entityManager, ManagerRegistry $doctrine){
 
         $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(UserController::class)->find($id);
+        $product = $entityManager->getRepository(User::class)->find($id);
 
         if (!$product) {
             throw $this->createNotFoundException(

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -24,7 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'User', cascade:['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: 'Discussions', mappedBy: 'Use', fetch:"EXTRA_LAZY", cascade:['persist', 'remove'])]
     protected $Discussions;
 
     /**
@@ -56,6 +58,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $lastActivityAt ;
+
+    public function __construct()
+    {
+        $this->Discussions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -235,5 +242,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isIsVerified(): ?bool
     {
         return $this->isVerified;
+    }
+
+    /**
+     * @return Collection<int, Discussions>
+     */
+    public function getDiscussions(): Collection
+    {
+        return $this->Discussions;
+    }
+
+    public function addDiscussion(Discussions $discussion): self
+    {
+        if (!$this->Discussions->contains($discussion)) {
+            $this->Discussions->add($discussion);
+            $discussion->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscussion(Discussions $discussion): self
+    {
+        if ($this->Discussions->removeElement($discussion)) {
+            // set the owning side to null (unless already changed)
+            if ($discussion->getUser() === $this) {
+                $discussion->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
